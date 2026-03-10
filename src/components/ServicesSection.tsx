@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { UtensilsCrossed, ShoppingBag, Truck, Clock } from "lucide-react";
+import BackgroundDecoration from "./BackgroundDecoration";
 
 const services = [
   { icon: UtensilsCrossed, title: "Dine-in", desc: "Elegant indoor & poolside dining" },
@@ -14,8 +15,9 @@ const ServicesSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="section-padding bg-background" ref={ref}>
-      <div className="max-w-5xl mx-auto">
+    <section id="services" className="section-padding relative overflow-hidden" ref={ref}>
+      <BackgroundDecoration variant="services" />
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -35,7 +37,7 @@ const ServicesSection = () => {
           {services.map((s, i) => (
             <motion.div
               key={s.title}
-              className="text-center p-8 border border-border/50 hover:border-primary/50 transition-all duration-500 group hover:gold-glow"
+              className="text-center p-8 glass-card hover:border-primary/50 transition-all duration-500 group hover:gold-glow"
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.15 }}

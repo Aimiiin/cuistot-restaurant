@@ -9,7 +9,6 @@ const navLinks = [
   { label: "Menu", href: "#menu" },
   { label: "Galerie", href: "#gallery" },
   { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -28,11 +27,10 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
             ? "bg-background/95 backdrop-blur-md border-b border-border"
             : "bg-transparent"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
           <a href="#hero">

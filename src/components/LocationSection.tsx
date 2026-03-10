@@ -1,14 +1,16 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { MapPin, Phone, ExternalLink } from "lucide-react";
+import BackgroundDecoration from "./BackgroundDecoration";
 
 const LocationSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-background" ref={ref}>
-      <div className="max-w-6xl mx-auto">
+    <section className="section-padding relative overflow-hidden" ref={ref}>
+      <BackgroundDecoration variant="contact" />
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}

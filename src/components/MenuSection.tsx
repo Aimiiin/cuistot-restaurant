@@ -1,7 +1,8 @@
 import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import BackgroundDecoration from "./BackgroundDecoration";
 
-type MenuItem = { name: string; price: string };
+type MenuItem = { name: string; price: string; subsection?: true };
 type MenuCategory = { category: string; items: MenuItem[] };
 
 const menuData: MenuCategory[] = [
@@ -107,19 +108,23 @@ const menuData: MenuCategory[] = [
   {
     category: "Boissons",
     items: [
-      { name: "Café Capsule", price: "250 DA" },
-      { name: "Cappucino", price: "100 DA" },
-      { name: "Thé maison Solo", price: "100 DA" },
+      // ── Boissons Fraîches ──
+      { name: "Boissons Fraîches", price: "", subsection: true },
       { name: "Jus de fraise", price: "400 DA" },
       { name: "Jus de citron", price: "350 DA" },
       { name: "Jus d'orange", price: "350 DA" },
       { name: "Mojito classique", price: "500 DA" },
       { name: "Cocktail de Fruits", price: "550 DA" },
-      { name: "Mojito (blue/red/fruit de passion)", price: "500 DA" },
+      // ── Signature ──
+      { name: "Signature", price: "", subsection: true },
+      { name: "Mojito (blue / red / fruit de passion)", price: "500 DA" },
       { name: "Bora Bora", price: "450 DA" },
-      { name: "Fleur Damour", price: "450 DA" },
+      { name: "Fleur d'amour", price: "450 DA" },
       { name: "Bleu Lagoon", price: "450 DA" },
-      { name: "Coca / Hamoud / Fonta (1L)", price: "150 DA" },
+      // ── Classic ──
+      { name: "Classic", price: "", subsection: true },
+      { name: "Coca / Hamoud / Fanta (1L)", price: "150 DA" },
+      { name: "Coca Canette", price: "100 DA" },
       { name: "Eau 1.5L", price: "100 DA" },
       { name: "Eau 0.5L", price: "50 DA" },
     ],
@@ -136,8 +141,9 @@ const MenuSection = () => {
   const activeMenu = menuData.find((c) => c.category === active);
 
   return (
-    <section id="menu" className="section-padding bg-background" ref={ref}>
-      <div className="max-w-5xl mx-auto">
+    <section id="menu" className="section-padding relative overflow-hidden" ref={ref}>
+      <BackgroundDecoration variant="menu" />
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -164,11 +170,10 @@ const MenuSection = () => {
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-5 py-2 text-xs tracking-widest uppercase font-body transition-all duration-300 border ${
-                active === cat
+              className={`px-5 py-2 text-xs tracking-widest uppercase font-body transition-all duration-300 border ${active === cat
                   ? "bg-primary text-primary-foreground border-primary"
                   : "border-border text-muted-foreground hover:border-primary hover:text-primary"
-              }`}
+                }`}
             >
               {cat}
             </button>
@@ -183,23 +188,40 @@ const MenuSection = () => {
           transition={{ duration: 0.5 }}
           className="grid gap-0"
         >
-          {activeMenu?.items.map((item, i) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: i * 0.05 }}
-              className="flex items-baseline justify-between py-4 border-b border-border/50 group hover:bg-secondary/30 px-4 -mx-4 transition-colors duration-300"
-            >
-              <span className="font-accent text-lg text-foreground group-hover:text-primary transition-colors duration-300">
-                {item.name}
-              </span>
-              <span className="border-b border-dotted border-border/50 flex-1 mx-4 min-w-8" />
-              <span className="text-primary font-body text-sm tracking-wider whitespace-nowrap">
-                {item.price}
-              </span>
-            </motion.div>
-          ))}
+          {activeMenu?.items.map((item, i) =>
+            item.subsection ? (
+              // Subsection header — small gold label, no price row
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: i * 0.05 }}
+                className="pt-6 pb-1 px-4 -mx-4"
+              >
+                <p className="font-accent text-xs tracking-[0.25em] uppercase text-primary/80">
+                  {item.name}
+                </p>
+                <div className="divider-gold !mx-0 mt-1" />
+              </motion.div>
+            ) : (
+              // Regular item row
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: i * 0.05 }}
+                className="flex items-baseline justify-between py-4 border-b border-border/50 group hover:bg-secondary/30 px-4 -mx-4 transition-colors duration-300"
+              >
+                <span className="font-accent text-lg text-foreground group-hover:text-primary transition-colors duration-300">
+                  {item.name}
+                </span>
+                <span className="border-b border-dotted border-border/50 flex-1 mx-4 min-w-8" />
+                <span className="text-primary font-body text-sm tracking-wider whitespace-nowrap">
+                  {item.price}
+                </span>
+              </motion.div>
+            )
+          )}
         </motion.div>
       </div>
     </section>

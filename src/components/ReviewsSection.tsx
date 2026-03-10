@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
+import BackgroundDecoration from "./BackgroundDecoration";
 
 const reviews = [
   { name: "Ahmed B.", text: "Un excellent restaurant avec une ambiance raffinée. Les plats sont délicieux et le service est impeccable.", rating: 5 },
@@ -13,8 +14,9 @@ const ReviewsSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-charcoal-deep" ref={ref}>
-      <div className="max-w-5xl mx-auto">
+    <section id="reviews" className="section-padding relative overflow-hidden" ref={ref}>
+      <BackgroundDecoration variant="reviews" />
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}

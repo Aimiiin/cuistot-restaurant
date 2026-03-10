@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import BackgroundDecoration from "./BackgroundDecoration";
 import food1 from "@/assets/food-1.png";
 import food2 from "@/assets/food-2.png";
 import food3 from "@/assets/food-3.png";
@@ -23,8 +24,9 @@ const GallerySection = () => {
   const [selected, setSelected] = useState<string | null>(null);
 
   return (
-    <section id="gallery" className="section-padding bg-charcoal-deep" ref={ref}>
-      <div className="max-w-7xl mx-auto">
+    <section id="gallery" className="section-padding relative overflow-hidden" ref={ref}>
+      <BackgroundDecoration variant="gallery" />
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}

@@ -41,6 +41,9 @@
     --gold-dark: 43 80% 40%;
     --charcoal: 0 0% 12%;
     --charcoal-deep: 0 0% 5%;
+    /* Royal / fine-dining undertones */
+    --royal-wine: 330 15% 8%;
+    --royal-warm: 25 10% 6%;
 
     --font-display: 'Playfair Display', serif;
     --font-body: 'Outfit', sans-serif;
@@ -118,5 +121,250 @@
 
   .divider-gold {
     @apply w-16 h-px bg-gradient-to-r from-transparent via-primary to-transparent mx-auto;
+  }
+
+  .luxury-gradient {
+    background: radial-gradient(circle at 30% 20%, #2a2a2a 0%, #0a0a0a 60%, #000000 100%);
+  }
+
+  .gold-glow-soft {
+    background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
+    filter: blur(80px);
+  }
+
+  .texture-noise {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    z-index: 1;
+  }
+
+  /* Luxury silk-style micro texture (subtle, not generic) */
+  .texture-luxury {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: 
+      radial-gradient(ellipse 100% 100% at 50% 50%, transparent 0%, transparent 99%, rgba(255,255,255,0.015) 100%),
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 3px);
+    background-size: 100% 100%, 4px 4px;
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  @keyframes slow-drift {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(15px) translateY(20px); }
+  }
+
+  @keyframes soft-pulse {
+    0%, 100% { opacity: 0.95; }
+    50% { opacity: 1; }
+  }
+
+  .animate-slow-drift {
+    animation: slow-drift 20s ease-in-out infinite alternate;
+  }
+
+  .animate-soft-pulse {
+    animation: soft-pulse 4s ease-in-out infinite;
+  }
+
+  /* Cinematic layered section backgrounds (depth, no flat) */
+  .bg-luxury-about {
+    background: 
+      radial-gradient(ellipse 140% 100% at 60% 20%, hsl(0 0% 14%) 0%, transparent 45%),
+      radial-gradient(ellipse 80% 100% at 20% 70%, hsl(330 12% 10% / 0.4) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 80% at 85% 50%, hsl(43 50% 30% / 0.06) 0%, transparent 45%),
+      radial-gradient(ellipse 100% 60% at 50% 100%, hsl(0 0% 2%) 0%, transparent 40%),
+      linear-gradient(165deg, hsl(0 0% 6%) 0%, hsl(0 0% 4%) 40%, hsl(0 0% 3%) 100%);
+  }
+
+  .bg-luxury-menu {
+    background: 
+      radial-gradient(ellipse 120% 50% at 50% -10%, hsl(0 0% 11%) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 100% at 10% 60%, hsl(25 8% 6% / 0.8) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 100% at 90% 40%, hsl(43 40% 25% / 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 100% 80% at 50% 110%, hsl(0 0% 1%) 0%, transparent 50%),
+      linear-gradient(180deg, hsl(0 0% 5%) 0%, hsl(0 0% 3%) 100%);
+  }
+
+  .bg-luxury-gallery {
+    background: 
+      radial-gradient(ellipse 100% 80% at 15% 30%, hsl(0 0% 10%) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 100% at 85% 70%, hsl(0 0% 8%) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 60% at 50% 50%, hsl(330 10% 8% / 0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 50% at 50% 100%, hsl(0 0% 4%) 0%, transparent 45%),
+      linear-gradient(175deg, hsl(0 0% 6%) 0%, hsl(0 0% 4%) 100%);
+  }
+
+  .bg-luxury-reviews {
+    background: 
+      radial-gradient(ellipse 100% 90% at 50% 40%, hsl(43 60% 35% / 0.08) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 60% at 20% 80%, hsl(0 0% 9%) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 80% at 80% 20%, hsl(0 0% 10%) 0%, transparent 50%),
+      radial-gradient(ellipse 100% 50% at 50% 100%, hsl(0 0% 3%) 0%, transparent 50%),
+      linear-gradient(180deg, hsl(0 0% 5%) 0%, hsl(0 0% 4%) 100%);
+  }
+
+  .bg-luxury-services {
+    background: 
+      radial-gradient(ellipse 90% 100% at 5% 50%, hsl(0 0% 11%) 0%, transparent 55%),
+      radial-gradient(ellipse 90% 100% at 95% 50%, hsl(43 40% 28% / 0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 100% 60% at 50% 80%, hsl(330 12% 6% / 0.4) 0%, transparent 55%),
+      linear-gradient(170deg, hsl(0 0% 5%) 0%, hsl(0 0% 4%) 100%);
+  }
+
+  .bg-luxury-contact {
+    background: 
+      radial-gradient(ellipse 100% 70% at 50% 100%, hsl(43 50% 30% / 0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 100% at 0% 50%, hsl(0 0% 7%) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 100% at 100% 50%, hsl(330 15% 6% / 0.5) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 50% at 50% 0%, hsl(0 0% 4%) 0%, transparent 50%),
+      linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 2%) 100%);
+  }
+
+  .bg-luxury-footer {
+    background: 
+      radial-gradient(ellipse 120% 60% at 50% -5%, hsl(0 0% 9%) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 80% at 20% 80%, hsl(43 40% 25% / 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 80% at 80% 80%, hsl(330 10% 8% / 0.3) 0%, transparent 50%),
+      linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 2%) 100%);
+  }
+
+  /* Premium motion: very slow, elegant */
+  @keyframes gradient-drift {
+    0%, 100% { opacity: 1; transform: translate(0, 0) scale(1); }
+    33% { opacity: 0.97; transform: translate(1.5%, 0.5%) scale(1.015); }
+    66% { opacity: 1; transform: translate(-0.5%, 1%) scale(0.99); }
+  }
+
+  @keyframes gold-shimmer {
+    0%, 100% { opacity: 0.12; }
+    50% { opacity: 0.22; }
+  }
+
+  @keyframes float-up {
+    0% { transform: translateY(0) scale(1); opacity: 0.08; }
+    50% { opacity: 0.18; }
+    100% { transform: translateY(-25px) scale(0.95); opacity: 0.04; }
+  }
+
+  /* Moving light streak (diagonal, soft) */
+  @keyframes light-streak {
+    0% { opacity: 0; transform: translateX(-20%) translateY(-20%) skewX(-12deg); }
+    15% { opacity: 0.2; }
+    50% { opacity: 0.25; }
+    85% { opacity: 0.15; }
+    100% { opacity: 0; transform: translateX(120%) translateY(120%) skewX(-12deg); }
+  }
+
+  /* Parallax layer motion */
+  @keyframes parallax-slow {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(0.5%, -0.3%); }
+  }
+
+  @keyframes parallax-slower {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-0.3%, 0.4%); }
+  }
+
+  @keyframes breath {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 1; }
+  }
+
+  .animate-gradient-drift {
+    animation: gradient-drift 35s ease-in-out infinite;
+  }
+
+  .animate-gold-shimmer {
+    animation: gold-shimmer 10s ease-in-out infinite;
+  }
+
+  .animate-float-up {
+    animation: float-up 28s ease-in-out infinite;
+  }
+
+  .animate-light-streak {
+    animation: light-streak 22s ease-in-out infinite;
+  }
+
+  .animate-parallax-slow {
+    animation: parallax-slow 40s ease-in-out infinite;
+  }
+
+  .animate-parallax-slower {
+    animation: parallax-slower 50s ease-in-out infinite;
+  }
+
+  .animate-breath {
+    animation: breath 6s ease-in-out infinite;
+  }
+
+  .vignette-soft {
+    box-shadow: inset 0 0 150px 50px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Glassmorphism overlay for sections */
+  .glass-overlay {
+    background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.02) 100%);
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
+  }
+
+  /* Section background image: cover, center, no-repeat */
+  .section-bg-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Soft fade at bottom of section: transparent → page black for seamless scroll */
+  .section-bottom-fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 55%;
+    min-height: 220px;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 30%,
+      rgba(0, 0, 0, 0.6) 60%,
+      hsl(0 0% 3%) 100%
+    );
+    z-index: 2;
+  }
+
+  /* Soft fade at top of section: page black → transparent for seamless entry from previous section */
+  .section-top-fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 30%;
+    min-height: 120px;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      hsl(0 0% 3%) 0%,
+      rgba(0, 0, 0, 0.5) 35%,
+      transparent 100%
+    );
+    z-index: 2;
   }
 }

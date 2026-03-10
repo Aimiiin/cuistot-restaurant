@@ -3,14 +3,16 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import exteriorImg from "@/assets/exterior.png";
 import poolImg from "@/assets/pool-night.png";
+import BackgroundDecoration from "./BackgroundDecoration";
 
 const AboutSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="section-padding bg-charcoal-deep" ref={ref}>
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="section-padding relative overflow-hidden" ref={ref}>
+      <BackgroundDecoration variant="about" />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Images */}
           <motion.div
